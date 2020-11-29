@@ -2,14 +2,13 @@ import Head from 'next/head'
 import { useState } from 'react'
 import { HFLayout } from '@components/Layout.js'
 import SearchFilter from '@components/SearchFilter'
-import BooksList from '@components/BooksList'
+import BorrowedList from '@components/BorrowedList'
 import Pagination from '@components/Pagination'
-import OnlyAvailable from '@components/OnlyAvailable'
 import { isMobile } from 'react-device-detect'
 import useSWR from 'swr'
 import { Container } from '@material-ui/core'
 
-const Home = () => {
+const Borrowed = () => {
   
   const [params, setParams] = useState({
     query: '',
@@ -17,26 +16,20 @@ const Home = () => {
     sort: 'title',
     order: 'asc',
     perPage: isMobile ? '20' : '50',
-    page: 1,
-    onlyAvailable: false
+    page: 1
   })
   
-  const { data, error } = useSWR(['/api/books', params])
+  const { data, mutate, error } = useSWR(['/api/librarian/borrowed', params]);
   
   return (
     <div>
       <Head>
-        <title>Library</title>
+        <title>Borrowed Books</title>
       </Head>
       <HFLayout>
         <Container maxWidth="lg">
-          <SearchFilter 
-            params={params} setParams={setParams} 
-            extraFilters={[
-              <OnlyAvailable params={params} setParams={setParams} />
-            ]} 
-          />
-          <BooksList books={data} setParams={setParams} error={error} />
+          <SearchFilter params={params} setParams={setParams} />
+          <BorrowedList books={data} mutate={mutate} error={error} />
           <Pagination 
             params={params} setParams={setParams} 
             perPage={params.perPage} data={data}
@@ -47,4 +40,4 @@ const Home = () => {
   )
 }
 
-export default Home;
+export default Borrowed;
