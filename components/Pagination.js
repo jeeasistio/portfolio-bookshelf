@@ -1,16 +1,22 @@
-import { IconButton, Box, Typography } from '@material-ui/core'
+import { IconButton, Box, Typography, useTheme} from '@material-ui/core'
 import NavigateNextIcon from '@icons/NavigateNext'
 import NavigateBeforeIcon from '@icons/NavigateBefore'
 
 const Pagination = ({ params, setParams, perPage, data }) => {
+  
+  const theme = useTheme();
   
   const handleNext = () => setParams(prev => ({...prev, page: prev.page + 1}));
   const handlePrev = () => setParams(prev => ({...prev, page: prev.page - 1}));
   
   return (
     <Box 
-      display="flex" justifyContent="center" 
-      alignItems="center" my={4}
+      style={{
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        margin: theme.spacing(2, 0)
+      }} 
     >
       <IconButton 
         onClick={handlePrev} color="secondary" 

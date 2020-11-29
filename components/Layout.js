@@ -48,7 +48,7 @@ const useStyles = makeStyles(theme => ({
       flex: 1
     },
     '& > *': {
-      color: theme.palette.primary.contrastText
+      color: 'inherit'
     }
   },
   footerRoot: {
