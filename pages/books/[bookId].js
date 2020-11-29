@@ -14,7 +14,7 @@ const Book = ({ book, userRole }) => {
       </Head>
       
       <HFLayout>
-        <Container maxWidth="lg">
+        <Container maxWidth="lg" >
           <BookDetails book={book} />
           <RequestButton bookId={book.book_id} />
         </Container>

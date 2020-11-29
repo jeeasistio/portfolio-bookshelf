@@ -194,7 +194,9 @@ const HLayout = ({ children }) => {
         </Toolbar>
       </AppBar>
       </HideOnScroll>
-      {children}
+      <Box minHeight={'70vh'} >
+        {children}
+      </Box>
     </>
   )
 }
@@ -205,8 +207,9 @@ const HFLayout = ({ children }) => {
   
   return (
     <>
-      <HLayout />
+      <HLayout>
         {children}
+      </HLayout>
       <Box className={classes.footerRoot}>
         <Copyright />
         <Typography>Privacy and Terms</Typography>
