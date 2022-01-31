@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { HFLayout } from '@components/Layout.js'
 import AddBook from '@components/AddBook'
-import { Container } from '@material-ui/core'
+import Container from '@material-ui/core/Container'
 
 const AddBookPage = () => {
   return (

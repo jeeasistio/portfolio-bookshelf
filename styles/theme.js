@@ -1,6 +1,6 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createTheme, responsiveFontSizes } from '@material-ui/core/styles';
 
-const theme = createMuiTheme({
+let theme = createTheme({
   palette: {
     primary: {
       light: '#444',
@@ -17,5 +17,7 @@ const theme = createMuiTheme({
     fontFamily: 'Lato'
   }
 });
+
+theme = responsiveFontSizes(theme)
 
 export default theme;
