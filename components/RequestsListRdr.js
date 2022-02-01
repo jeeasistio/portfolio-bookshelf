@@ -4,9 +4,9 @@ import CloseIcon from '@icons/Close'
 import RequestsSkeleton from './RequestsSkeleton'
 import ErrorMsg from './ErrorMsg'
 import axios from 'axios'
-import { 
-  Box, 
-  IconButton, 
+import {
+  Box,
+  IconButton,
   Typography,
   Table,
   TableContainer,
@@ -18,7 +18,7 @@ import {
   makeStyles
 } from '@material-ui/core'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   acceptStyle: {
     color: theme.palette.success.main
   },
@@ -27,51 +27,58 @@ const useStyles = makeStyles(theme => ({
   },
   pendingStyle: {
     color: theme.palette.warning.main
+  },
+  tableHeading: {
+    color: theme.palette.text.secondary
   }
 }))
 
 const RequestsListRdr = ({ requests, mutate, error }) => {
-  
-  const classes = useStyles();
-  
-  const cancelRequest = (requestId) => {
-    axios.delete(`/api/reader/requests/${requestId}`)
-      .then(res => mutate())
+  const classes = useStyles()
+
+  const cancelRequest = async (requestId) => {
+    await axios.delete(`/api/reader/requests/${requestId}`)
+    mutate()
   }
-  
+
   return (
     <TableContainer>
       <Table>
         <TableHead>
-          <TableRow> 
-            <TableCell align="center">Book Requesting</TableCell> 
-            <TableCell align="center">Status</TableCell> 
-            <TableCell align="center">Action</TableCell> 
-          </TableRow> 
+          <TableRow>
+            <TableCell className={classes.tableHeading} align="center">
+              Book Requesting
+            </TableCell>
+            <TableCell className={classes.tableHeading} align="center">
+              Status
+            </TableCell>
+            <TableCell className={classes.tableHeading} align="center">
+              Action
+            </TableCell>
+          </TableRow>
         </TableHead>
-        
+
         <TableBody>
           {error && (
             <TableCell colSpan="4">
               <ErrorMsg message="Something went wrong" />
             </TableCell>
           )}
-          
-          {requests === undefined && (
-            <RequestsSkeleton />
-          )}
-          
+
+          {requests === undefined && <RequestsSkeleton />}
+
           {requests?.length === 0 && (
             <TableCell colSpan="4">
               <ErrorMsg message="No Requests Found" />
             </TableCell>
           )}
-          
-          {requests?.map(request => (
+
+          {requests?.map((request) => (
             <TableRow key={uuidv4()}>
               <TableCell>
-                <Typography 
-                  component={Button} href={`/books/${request.book_id}`}
+                <Typography
+                  component={Button}
+                  href={`/books/${request.book_id}`}
                   className={classes.buttonStyle}
                 >
                   {request.title}
@@ -79,19 +86,26 @@ const RequestsListRdr = ({ requests, mutate, error }) => {
               </TableCell>
               <TableCell align="center">
                 {request.request_status === 'accepted' && (
-                  <Typography className={classes.acceptStyle}>Accepted</Typography>
+                  <Typography className={classes.acceptStyle}>
+                    Accepted
+                  </Typography>
                 )}
                 {request.request_status === 'rejected' && (
-                  <Typography className={classes.rejectStyle}>Rejected</Typography>
+                  <Typography className={classes.rejectStyle}>
+                    Rejected
+                  </Typography>
                 )}
                 {request.request_status === 'pending' && (
-                  <Typography className={classes.pendingStyle}>Pending</Typography>
+                  <Typography className={classes.pendingStyle}>
+                    Pending
+                  </Typography>
                 )}
               </TableCell>
               <TableCell>
                 {request.request_status === 'pending' && (
                   <Button
-                    startIcon={<CloseIcon />} className={classes.rejectStyle}
+                    startIcon={<CloseIcon />}
+                    className={classes.rejectStyle}
                     onClick={() => cancelRequest(request.request_id)}
                   >
                     Cancel
@@ -99,7 +113,8 @@ const RequestsListRdr = ({ requests, mutate, error }) => {
                 )}
                 {request.request_status !== 'pending' && (
                   <Button
-                    startIcon={<DeleteIcon />} className={classes.rejectStyle}
+                    startIcon={<DeleteIcon />}
+                    className={classes.rejectStyle}
                     onClick={() => cancelRequest(request.request_id)}
                   >
                     Remove
@@ -114,4 +129,4 @@ const RequestsListRdr = ({ requests, mutate, error }) => {
   )
 }
 
-export default RequestsListRdr;
+export default RequestsListRdr

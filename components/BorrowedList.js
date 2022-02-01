@@ -4,8 +4,8 @@ import BorrowedSkeleton from './BorrowedSkeleton'
 import ErrorMsg from './ErrorMsg'
 import axios from 'axios'
 import { Alert } from '@material-ui/lab'
-import { 
-  Box, 
+import {
+  Box,
   Button,
   Typography,
   Table,
@@ -18,10 +18,10 @@ import {
   makeStyles
 } from '@material-ui/core'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   retrieveStyle: {
     textTransform: 'none',
-    color: theme.palette.primary.main
+    color: theme.palette.error.main
   },
   titleStyle: {
     textTransform: 'none'
@@ -29,68 +29,72 @@ const useStyles = makeStyles(theme => ({
   personStyle: {
     textTransform: 'none',
     fontWeight: theme.typography.fontWeightRegular
+  },
+  tableHeading: {
+    color: theme.palette.text.secondary
   }
 }))
 
 const BorrowedList = ({ books, mutate, error }) => {
-  
-  const classes = useStyles();
-  const [snackOpen, setSnackOpen] = useState(false);
-  const [snackMessage, setsnackMessage] = useState('sucess');
-  const [snackStatus, setSnackStatus] = useState('Book retrieved');
-  
-  const retrieveBook = (bookId) => {
-    axios.patch('/api/librarian/borrowed', { bookId })
-      .then(res => {
-        mutate();
-        setSnackOpen(true);
-        setsnackMessage('Book retrieved');
-        setSnackStatus('success');
-      })
-      .catch(err => {
-        setSnackOpen(true);
-        setsnackMessage(err.response.data.msg);
-        setSnackStatus('error');
-      })
+  const classes = useStyles()
+  const [snackOpen, setSnackOpen] = useState(false)
+  const [snackMessage, setsnackMessage] = useState('sucess')
+  const [snackStatus, setSnackStatus] = useState('Book retrieved')
+
+  const retrieveBook = async (bookId) => {
+    try {
+      await axios.patch('/api/librarian/borrowed', { bookId })
+      mutate()
+      setSnackOpen(true)
+      setsnackMessage('Book retrieved')
+      setSnackStatus('success')
+    } catch (err) {
+      setSnackOpen(true)
+      setsnackMessage(err.response.data.msg)
+      setSnackStatus('error')
+    }
   }
-  
-  const handleClose = () => setSnackOpen(false);
-  
+
+  const handleClose = () => setSnackOpen(false)
+
   return (
     <TableContainer>
       <Table>
         <TableHead>
-          <TableRow> 
-            <TableCell align="center">Book Id</TableCell> 
-            <TableCell align="center">Book Title</TableCell> 
-            <TableCell align="center">Person Borrowing</TableCell> 
-            <TableCell align="center">Retrieve</TableCell> 
-          </TableRow> 
+          <TableRow>
+            <TableCell className={classes.tableHeading} align="center">
+              Book Title
+            </TableCell>
+            <TableCell className={classes.tableHeading} align="center">
+              Person Borrowing
+            </TableCell>
+            <TableCell className={classes.tableHeading} align="center">
+              Retrieve
+            </TableCell>
+          </TableRow>
         </TableHead>
-        
+
         <TableBody>
           {error && (
             <TableCell colSpan="4">
               <ErrorMsg message="Something went wrong" />
             </TableCell>
           )}
-          
-          {books === undefined && (<BorrowedSkeleton />)}
-          
+
+          {books === undefined && <BorrowedSkeleton />}
+
           {books?.length === 0 && (
             <TableCell colSpan="4">
               <ErrorMsg message="No Books Found" />
             </TableCell>
           )}
-          
-          {books?.map(book => (
+
+          {books?.map((book) => (
             <TableRow key={uuidv4()}>
               <TableCell>
-                <Typography>{book.book_id}</Typography>
-              </TableCell>
-              <TableCell align="center">
                 <Typography
-                  component={Button} href={`/books/${book.book_id}`}
+                  component={Button}
+                  href={`/books/${book.book_id}`}
                   className={classes.titleStyle}
                 >
                   {book.title}
@@ -98,7 +102,8 @@ const BorrowedList = ({ books, mutate, error }) => {
               </TableCell>
               <TableCell align="center">
                 <Typography
-                  component={Button} href={`/librarian/visit/requests/${book.person_id}`}
+                  component={Button}
+                  href={`/librarian/visit/requests/${book.person_id}`}
                   className={classes.personStyle}
                 >
                   {book.person_name}
@@ -106,7 +111,8 @@ const BorrowedList = ({ books, mutate, error }) => {
               </TableCell>
               <TableCell align="center">
                 <Button
-                  className={classes.retrieveStyle} disableTypography
+                  className={classes.retrieveStyle}
+                  disableTypography
                   onClick={() => retrieveBook(book.book_id)}
                 >
                   Retrieve
@@ -125,4 +131,4 @@ const BorrowedList = ({ books, mutate, error }) => {
   )
 }
 
-export default BorrowedList;
+export default BorrowedList

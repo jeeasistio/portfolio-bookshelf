@@ -1,5 +1,4 @@
 import { useState, useRef, useContext } from 'react'
-import { useRouter } from 'next/router'
 import AccountCircleIcon from '@icons/AccountCircle'
 import AddIcon from '@material-ui/icons/AddCircle'
 import MenuBookIcon from '@icons/MenuBook'
@@ -11,6 +10,7 @@ import PersonIcon from '@icons/Person'
 import UserContext from '@contexts/UserContext'
 import HideOnScroll from '@components/HideOnScroll'
 import Copyright from './Copyright'
+import Link from 'next/link'
 import {
   AppBar,
   Typography,
@@ -28,6 +28,9 @@ import {
 } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
+  toolbarStyle: {
+    height: '10vh'
+  },
   logoutStyle: {
     color: theme.palette.error.main
   },
@@ -41,6 +44,10 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       textAlign: 'center'
     }
+  },
+  linkLogoStyle: {
+    textDecoration: 'none',
+    color: 'inherit'
   },
   linksStyle: {
     display: 'flex',
@@ -65,7 +72,6 @@ const useStyles = makeStyles((theme) => ({
 
 const HLayout = ({ children }) => {
   const classes = useStyles()
-  const router = useRouter()
   const { userRole, logoutFunc } = useContext(UserContext)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -77,8 +83,6 @@ const HLayout = ({ children }) => {
   }
 
   const anchorEl = useRef()
-
-  const handleLogo = () => router.push('/')
 
   return (
     <>
@@ -103,13 +107,10 @@ const HLayout = ({ children }) => {
               )}
             </Hidden>
 
-            <Typography
-              className={classes.logoStyle}
-              onClick={handleLogo}
-              component="h1"
-              variant="h4"
-            >
-              Library
+            <Typography className={classes.logoStyle} variant="h4">
+              <Link href="/">
+                <a className={classes.linkLogoStyle}>Bookshelf</a>
+              </Link>
             </Typography>
 
             <Box className={classes.linksStyle}>
@@ -226,7 +227,6 @@ const HFLayout = ({ children }) => {
       <HLayout>{children}</HLayout>
       <Box className={classes.footerRoot}>
         <Copyright />
-        <Typography>Privacy and Terms</Typography>
       </Box>
     </>
   )

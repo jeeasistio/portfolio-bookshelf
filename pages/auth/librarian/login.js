@@ -24,7 +24,7 @@ import {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '100vh'
+    minHeight: '90vh'
   },
   image: {
     backgroundImage: 'url(https://source.unsplash.com/featured?books)',
@@ -68,6 +68,9 @@ const useStyles = makeStyles((theme) => ({
   },
   librarianStyle: {
     color: theme.palette.warning.main
+  },
+  copyrightCtn: {
+    color: theme.palette.text.secondary
   }
 }))
 
@@ -178,7 +181,7 @@ const Login = () => {
                     </MuiLink>
                   </Grid>
                 </Grid>
-                <Box mt={5}>
+                <Box className={classes.copyrightCtn} mt={5}>
                   <Copyright align="center" />
                 </Box>
               </form>

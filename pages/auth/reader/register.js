@@ -36,7 +36,6 @@ const Register = () => {
     email: '',
     password: '',
     confirmPassword: '',
-    username: '',
     address: '',
     libraryPassword: ''
   })

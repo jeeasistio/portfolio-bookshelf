@@ -34,6 +34,9 @@ const useStyles = makeStyles(theme => ({
   personStyle: {
     textTransform: 'none',
     fontWeight: theme.typography.fontWeightRegular
+  },
+  tableHeading: {
+    color: theme.palette.text.secondary
   }
 }))
 
@@ -73,9 +76,9 @@ const RequestsList = ({ requests, mutate, error }) => {
       <Table>
         <TableHead>
           <TableRow> 
-            <TableCell align="center">Book Requesting</TableCell> 
-            <TableCell align="center">Requested by</TableCell> 
-            <TableCell align="center">Status</TableCell> 
+            <TableCell className={classes.tableHeading} align="center">Book Requesting</TableCell> 
+            <TableCell className={classes.tableHeading} align="center">Requested by</TableCell> 
+            <TableCell className={classes.tableHeading} align="center">Status</TableCell> 
           </TableRow> 
         </TableHead>
         
