@@ -9,8 +9,9 @@ const AddBookPage = () => {
       <Head>
         <title>Add Book</title>
       </Head>
+
       <HFLayout>
-        <Container maxWidth="lg">
+        <Container maxWidth="sm">
           <AddBook />
         </Container>
       </HFLayout>
@@ -18,4 +19,4 @@ const AddBookPage = () => {
   )
 }
 
-export default AddBookPage;
+export default AddBookPage

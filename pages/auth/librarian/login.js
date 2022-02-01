@@ -24,32 +24,34 @@ import {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '100vh',
+    height: '100vh'
   },
   image: {
     backgroundImage: 'url(https://source.unsplash.com/featured?books)',
     backgroundRepeat: 'no-repeat',
     backgroundColor:
-      theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
+      theme.palette.type === 'light'
+        ? theme.palette.grey[50]
+        : theme.palette.grey[900],
     backgroundSize: 'cover',
-    backgroundPosition: 'center',
+    backgroundPosition: 'center'
   },
   paper: {
     margin: theme.spacing(8, 4),
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.secondary.main
   },
   form: {
     width: '100%',
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(1)
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(3, 0, 2)
   },
   register: {
     marginBottom: theme.spacing(4),
@@ -67,25 +69,26 @@ const useStyles = makeStyles((theme) => ({
   librarianStyle: {
     color: theme.palette.warning.main
   }
-}));
+}))
 
 const Login = () => {
-  
-  const classes = useStyles();
-  const router = useRouter();
-  const [status, setStatus] = useState({});
-  
-  const { register, handleSubmit, errors } = useForm();
-  const { setUserRole } = useContext(UserContext);
-  
-  const loginFunc = (data) => {
-    setStatus({ status: 'info', message: 'Logging In...' });
-    axios.post('/api/auth/librarian/login', data)
-      .then(res => {
-        setUserRole('librarian');
-        router.push('/');
-      })
-      .catch(err => setStatus({ status: 'error', message: err.response.data.msg }))
+  const classes = useStyles()
+  const router = useRouter()
+  const [status, setStatus] = useState({})
+
+  const { register, handleSubmit, errors } = useForm()
+  const { setUserRole } = useContext(UserContext)
+
+  const loginFunc = async (data) => {
+    setStatus({ status: 'info', message: 'Logging In...' })
+    
+    try {
+      await axios.post('/api/auth/librarian/login', data)
+      setUserRole('librarian')
+      router.push('/')
+    } catch (err) {
+      setStatus({ status: 'error', message: err.response.data.msg })
+    }
   }
 
   return (
@@ -96,13 +99,22 @@ const Login = () => {
       <HLayout>
         <Grid container component="main" className={classes.root}>
           <Grid item xs={false} sm={4} md={7} className={classes.image} />
-          <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+          <Grid
+            item
+            xs={12}
+            sm={8}
+            md={5}
+            component={Paper}
+            elevation={6}
+            square
+          >
             <div className={classes.paper}>
               <Avatar className={classes.avatar}>
                 <FaceIcon />
               </Avatar>
               <Typography component="pre" variant="h5" paragraph>
-                Login as <span className={classes.librarianStyle}>Librarian</span>
+                Login as{' '}
+                <span className={classes.librarianStyle}>Librarian</span>
               </Typography>
               {status.status && (
                 <Alert severity={status.status} className={classes.alertStyle}>
@@ -175,7 +187,7 @@ const Login = () => {
         </Grid>
       </HLayout>
     </div>
-  );
+  )
 }
 
-export default Login;
+export default Login
