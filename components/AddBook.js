@@ -48,8 +48,8 @@ const AddBook = () => {
         </Box>
 
         <Box className={classes.sectionCtn}>
-          <Box p={2} component={Paper}>
-            <form className={classes.form}>
+          <form className={classes.form} onSubmit={handleSubmit(addFunc)}>
+            <Box p={2} component={Paper}>
               <TextField
                 margin="normal"
                 fullWidth
@@ -81,21 +81,20 @@ const AddBook = () => {
                 helperText={errors.summary?.message}
                 inputRef={register({ required: 'Please enter a summary' })}
               />
-            </form>
-          </Box>
-        </Box>
-
-        <Box className={classes.sectionCtn}>
-          <Button
-            onClick={handleSubmit(addFunc)}
-            size="large"
-            color="primary"
-            variant="contained"
-            fullWidth
-            disabled={status.status === 'loading'}
-          >
-            Add
-          </Button>
+            </Box>
+            <Box className={classes.sectionCtn}>
+              <Button
+                size="large"
+                color="primary"
+                variant="contained"
+                fullWidth
+                type="submit"
+                disabled={status.status === 'info'}
+              >
+                Add
+              </Button>
+            </Box>
+          </form>
         </Box>
       </Box>
     </Box>
