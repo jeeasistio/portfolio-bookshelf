@@ -29,7 +29,8 @@ import {
 
 const useStyles = makeStyles((theme) => ({
   toolbarStyle: {
-    height: '10vh'
+    minHeight: '10vh',
+    flexWrap: 'wrap'
   },
   logoutStyle: {
     color: theme.palette.error.main
