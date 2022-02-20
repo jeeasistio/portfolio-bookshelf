@@ -26,7 +26,7 @@ const Home = () => {
   return (
     <div>
       <Head>
-        <title>Library</title>
+        <title>Bookshelf</title>
       </Head>
       <HFLayout>
         <Container maxWidth="lg">
