@@ -12,7 +12,7 @@ export default handler
   bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
     db.one(
       `INSERT INTO people ($<columns~>)
-       VALUES ($<email>, $<password>, $<address>, $<role>)
+       VALUES ($<person_name>, $<email>, $<password>, $<address>, $<role>)
        RETURNING $<returning~>`, 
       { columns, returning, role, ...req.body, password: hash }
     )

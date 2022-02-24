@@ -73,7 +73,7 @@ const Step3 = ({ fields, handleBack, setFields, librarian }) => {
     setStatus({ status: 'info', message: 'Processing...' })
     axios.post(
       librarian ? '/api/auth/librarian/register' : '/api/auth/reader/register', 
-      fields
+      {...fields, person_name: fields.username}
     )
       .then(res => setStatus({ status: 'success', message: res.data.msg }))
       .catch(err => setStatus({ status: 'error', message: err.response.data.msg }))
