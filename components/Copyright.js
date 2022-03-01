@@ -6,8 +6,8 @@ const Copyright = ({ align="left" }) => {
       {'© '}
       {new Date().getFullYear()}
       {' '}
-      <Link color="inherit" href="#">
-        library-pink.vercel.app
+      <Link color="inherit" href="/">
+        Bookshelf
       </Link>
     </Typography>
   );
