@@ -1,0 +1,43 @@
+{
+    "database.connections": {
+        "1643740038425": {
+            "host": "127.0.0.1",
+            "dbPath": "",
+            "port": 5432,
+            "user": "postgres",
+            "authType": "default",
+            "password": "2aZqO-5-rSe97TCrylfMjueRfpb3M-PS",
+            "encoding": "utf8",
+            "clientKeyPath": null,
+            "clientCertPath": null,
+            "caPath": null,
+            "database": "postgres",
+            "useSSL": false,
+            "usingSSH": false,
+            "showHidden": false,
+            "includeDatabases": null,
+            "dbType": "PostgreSQL",
+            "encrypt": false,
+            "isCluster": false,
+            "connectionUrl": "postgres://pksgtwap:2aZqO-5-rSe97TCrylfMjueRfpb3M-PS@rosie.db.elephantsql.com:5432/pksgtwap",
+            "srv": false,
+            "esAuth": "none",
+            "global": false,
+            "key": "1643740038425",
+            "timezone": "+00:00",
+            "ssh": {
+                "host": "",
+                "privateKeyPath": "C:\\Users\\User\\.ssh\\id_rsa",
+                "port": 22,
+                "username": "root",
+                "type": "password",
+                "connectTimeout": 10000,
+                "algorithms": {
+                    "cipher": []
+                }
+            },
+            "useConnectionString": true,
+            "connectionKey": "database.connections"
+        }
+    }
+}
