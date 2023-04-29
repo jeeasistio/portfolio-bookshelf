@@ -22,8 +22,6 @@ const Home = () => {
   })
   
   const { data, error } = useSWR(['/api/books', params])
-
-  console.log(data)
   
   return (
     <div>

@@ -12,8 +12,6 @@ import {
   Avatar,
   Button,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Link as MuiLink,
   Paper,
   Box,

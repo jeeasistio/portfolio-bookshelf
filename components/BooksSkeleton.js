@@ -1,6 +1,5 @@
 import { v4 as uuidv4 } from 'uuid'
 import { Skeleton } from '@material-ui/lab'
-import BookmarkIcon from '@icons/Bookmark'
 import { isMobile } from 'react-device-detect'
 import { 
   Grid,

@@ -1,7 +1,6 @@
 import { v4 as uuidv4 } from 'uuid'
 import BooksSkeleton from './BooksSkeleton'
 import ErrorMsg from './ErrorMsg'
-import axios from 'axios'
 import {
   Grid,
   Typography,
